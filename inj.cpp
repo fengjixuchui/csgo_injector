@@ -24,13 +24,8 @@ bool Injector::Inject(const char* procName, const char* dllName)
 
 	HANDLE Proc = 0;
 	char buf[50] = { 0 };
-	LPVOID RemoteString, LoadLibAddy;//, LdrLoadDll, NtOpenFile;
+	LPVOID RemoteString, LoadLibAddy;
 
-	//LdrLoadDll = GetProcAddress(GetModuleHandleA("ntdll.dll"), "LdrLoadDll");
-	//NtOpenFile = GetProcAddress(GetModuleHandleA("ntdll.dll"), "NtOpenFile");
-
-	//WriteProcessMemory(Proc, LdrLoadDll, LdrLoadDll, 10, 0);
-	//WriteProcessMemory(Proc, NtOpenFile, NtOpenFile, 10, 0);
 	LPVOID ntOpenFile = GetProcAddress(LoadLibraryW(L"ntdll"), "NtOpenFile");
 	if (ntOpenFile) {
 		char originalBytes[5];
